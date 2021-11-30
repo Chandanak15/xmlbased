@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+           
+    <context:annotation-config/>
+
+
+	<bean id="employee" class="com.example.xmlbased.Employee"
+		init-method="customInitMethod" destroy-method="customDestroyMethod" autowire="byType" lazy-init="true">
+		<property name="name" value="Asha" />
+		<property name="designation" value="Software Engineer" />
+		<property name="project" ref="project" />
+		<property name="dependants">
+              <list>
+              <value>Harish</value>
+              <value>Swara</value>
+              <value>Nidhi</value>  
+              </list>
+
+		</property>
+	</bean>
+
+	<bean id="project" class="com.example.xmlbased.Project" scope="prototype">
+		<constructor-arg name="name" value="FS" />
+		<constructor-arg name="duration" value="3" />
+	</bean>
+
+	<bean id="customBeanPostProcessor"
+		class="com.example.xmlbased.CustomBeanPostProcessor"></bean>
+</beans>
